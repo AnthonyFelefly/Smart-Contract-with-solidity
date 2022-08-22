@@ -45,7 +45,7 @@ App = {
   },
   loadAccount: async () => {
     App.account = await ethereum.request({ method: 'eth_accounts' });
-    //App.account = App.account['0']
+    App.account = App.account['0']
     
   },
   loadContract: async() =>
@@ -92,6 +92,12 @@ App = {
         }
         $newTaskTemplate.show()
     }
+  },
+  createTask: async () => {
+    App.setLoading(true)
+    const content = $('#newTask').val()
+    await App.todoList.createTask(content,{from: App.account})
+    window.location.reload()
   },
   setLoading: (boolean)=> {
   App.loading = boolean 
